@@ -8,5 +8,5 @@ class alumnos extends Model
 {
 	protected $table = "alumnos";
 	protected $primaryKey ="nc";
-	protected $fillable = ['nc', 'nameStudent', 'career', 'age'];
+	protected $fillable = ['nc', 'nameStudent', 'career', 'age', 'phone'];
 }

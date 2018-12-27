@@ -18,7 +18,7 @@ class AlumnosController extends Controller
         return view('index', compact('students'));
     }
 
-    public function create(Request $request)
+    public function newStudent(Request $request)
     {
         \App\alumnos::create([
             'nc' => $request['nc'],
@@ -27,8 +27,13 @@ class AlumnosController extends Controller
             'age' => $request['age'],
             'phone' => $request['phone'],
             ]);
+        return "Alumno registrado correctamente";
+        //return view('create');
+        //return redirect('create')->with('message', 'store');
+    }
+
+    public function create(){
         return view('create');
-        return redirect('create')->with('message', 'store');
     }
 
     public function read()

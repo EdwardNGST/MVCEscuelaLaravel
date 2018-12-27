@@ -2,54 +2,53 @@
 @section('content')
 <div class="container">
 	<h2>Insertar nuevo alumno</h2>
-	<form class="form-horizontal" action="/action_page.php">
+	{!!Form::open(['route'=>'newStudent', 'method'=>'POST', 'class'=>'form-horizontal'])!!}
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="ncontrol">Numero de Control:</label>
+			{!!Form::label('text', 'Numero de Control: ', array('class' => 'control-label col-sm-2'))!!}
 			<div class="col-sm-10">
-				<input type="number" class="form-control" id="ncontrol" placeholder="Ingrese su numero de control" name="nc">
+				{!!Form::number('nc', null, ['class'=>'form-control', 'placeholder'=>'Ingrese su numero de control'])!!}
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="nameS">Nombre del Estudiante:</label>
-			<div class="col-sm-10">          
-				<input type="text" class="form-control" id="nameS" placeholder="Ingrese su nombre" name="name">
+			{!!Form::label('text', 'Nombre del Estudiante:', array('class' => 'control-label col-sm-2'))!!}
+			<div class="col-sm-10">
+				{!!Form::text('name', null, ['class'=>'form-control', 'placeholder'=>'Ingrese su nombre'])!!}
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="careerS">Carrera del Estudiante:</label>
-			<div class="col-sm-10">          
-				<div class="dropdown" id="careerS">
-					<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" name="career">Carrera
-					<span class="caret"></span></button>
-					<ul class="dropdown-menu">
-						<li><a href="#">Administración</a></li>
-						<li><a href="#">Arquitectura</a></li>
-						<li><a href="#">Contador Público</a></li>
-						<li><a href="#">Electromecánica</a></li>
-						<li><a href="#">Gestión Empresarial</a></li>
-						<li><a href="#">Sistemas Computacionales</a></li>
-						<li><a href="#">ITICS</a></li>
-					</ul>
-				</div>
+			{!!Form::label('text', 'Carrera:', array('class' => 'control-label col-sm-2'))!!}
+			<div class="col-sm-10">
+				{!!Form::select('career', array(
+					'null' => 'Seleccione su carrera',
+					'Administración' => 'Administración',
+					'Arquitectura' => 'Arquitectura',
+					'Contador Público' => 'Contador Público',
+					'Electromecánica' => 'Electromecánica',
+					'Gestión Empresarial' => 'Gestión Empresarial',
+					'Sistemas Computacionales' => 'Sistemas Computacionales',
+					'ITICS' => 'ITICS'
+				), 
+				null, array('class'=>'form-control','style'=>'' )
+				)!!}
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="ageS">Edad:</label>
-			<div class="col-sm-10">          
-				<input type="number" class="form-control" id="ageS" placeholder="Ingrese su edad" name="age">
+			{!!Form::label('text', 'Edad:', array('class' => 'control-label col-sm-2'))!!}
+			<div class="col-sm-10">
+				{!!Form::number('age', null, ['class'=>'form-control', 'placeholder'=>'Ingrese su edad'])!!}
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="phoneS">Telefono:</label>
-			<div class="col-sm-10">          
-				<input type="number" class="form-control" id="phoneS" placeholder="Ingrese su telefono" name="phone">
+			{!!Form::label('text', 'Telefono:', array('class' => 'control-label col-sm-2'))!!}
+			<div class="col-sm-10">
+				{!!Form::number('phone', '', ['class'=>'form-control', 'placeholder'=>'Ingrese su telefono'])!!}
 			</div>
 		</div>
 		<div class="form-group">        
 			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-default">Registrar</button>
+				{!!Form::submit('Registrar', ['class'=>'btn btn-default'])!!}
 			</div>
 		</div>
-	</form>
+	{!!Form::close()!!}
 </div>
 @stop
