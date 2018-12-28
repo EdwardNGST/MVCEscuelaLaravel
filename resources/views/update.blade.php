@@ -2,6 +2,18 @@
 @section('content')
 <div class="container">
 	<h2>Modificar alumno</h2>
+	<form id="search" class="form-horizontal">
+		<div class="form-group">
+			<label class="control-label col-md-2 col-sm-12" for="search">Busqueda:</label>
+			<div class="col-md-9 col-sm-11">          
+				<input type="number" class="form-control" id="nc" placeholder="Ingrese el numero de control" name="search">
+			</div>
+			<input type="submit" class="btn btn-default col-md-1 col-sm-1" id="btnSearch" value="Buscar">
+		</div>
+		<div id="search_alert">
+		</div>
+	</form>
+	<hr>
 	<form class="form-horizontal" action="/action_page.php">
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="nameS">Nombre del Estudiante:</label>
@@ -10,10 +22,10 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="careerS">Carrera del Estudiante:</label>
+			<label class="control-label col-sm-2" for="careerS">Carrera:</label>
 			<div class="col-sm-10">          
 				<div class="dropdown" id="careerS">
-					<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" name="career">Carrera
+					<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" name="career">Seleccione su carrera
 					<span class="caret"></span></button>
 					<ul class="dropdown-menu">
 						<li><a href="#">Administración</a></li>
@@ -46,4 +58,31 @@
 		</div>
 	</form>
 </div>
+<script type="text/javascript">
+	$( "#search" ).submit(function( event ) {
+		searchByNC($('#nc').val());
+	});
+	$('#nc').on('keyup',function(){
+		searchByNC($(this).val());
+	})
+	function searchByNC(nc){
+	    $.ajax({
+	      type : 'get',
+	      url : '{{URL::to('searchStudent')}}',
+	      data:{'nc':nc},
+	      success:function(data){
+		      if (data!="") {
+		      	
+		      	$('#search_alert').html('<div class="alert alert-success">Alumno encontrado!</div>');
+		      }else{
+		      	$('#search_alert').html('<div class="alert alert-warning">No se encuentra el alumno que busca</div>');
+		      }
+	      },
+	      beforeSend:function(data){
+	      	$('#search_alert').html('<div class="alert alert-warning">Buscando</div>');
+	      }
+	    });
+		event.preventDefault();
+	}
+</script>
 @stop

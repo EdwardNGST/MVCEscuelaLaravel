@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
+use App\Quotation;
 use App\alumnos;
 use Illuminate\Http\Request;
 
@@ -38,7 +39,46 @@ class AlumnosController extends Controller
 
     public function read()
     {
-        return view('read');
+        $students = \App\alumnos::All();
+        return view('read', compact('students'));
+    }
+
+    public function readStudent(Request $request){
+        if($request->ajax()){
+            $output="";
+            $students=DB::table('alumnos')->where('nameStudent','LIKE','%'.$request->readStudent."%")->get();
+
+            if($students){
+                foreach ($students as $key => $student) {
+                    $output.='<tr>'.
+                    '<td>'.$student->nc.'</td>'.
+                    '<td>'.$student->nameStudent.'</td>'.
+                    '<td>'.$student->career.'</td>'.
+                    '<td>'.$student->age.'</td>'.
+                    '<td>'.$student->phone.'</td>'.
+                    '</tr>';
+                }
+                return Response($output);
+            }
+        }
+    }
+
+    public function searchStudent(Request $request){
+        if($request->ajax()){
+            $output="";
+            $students=DB::table('alumnos')->where('nc','=',$request->nc)->get();
+            if($students){
+                foreach ($students as $key => $student) {
+                    $output.='<tr>'.
+                    '<td>'.$student->nameStudent.'</td>'.
+                    '<td>'.$student->career.'</td>'.
+                    '<td>'.$student->age.'</td>'.
+                    '<td>'.$student->phone.'</td>'.
+                    '</tr>';
+                }
+                return Response($output);
+            }
+        }
     }
 
     public function update()

@@ -25,3 +25,7 @@ Route::get('/update', 'AlumnosController@update');
 Route::get('/delete', 'AlumnosController@delete');
 
 Route::post('newStudent', ['as' => 'newStudent', 'uses' => 'AlumnosController@newStudent']);
+
+Route::get('readStudent', 'AlumnosController@readStudent');
+
+Route::get('searchStudent', 'AlumnosController@searchStudent');

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="_token" content="{{ csrf_token() }}">
 	<title>Inicio - Escuela</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
@@ -8,6 +9,9 @@
 	<style type="text/css">
 		.navbar{
 			margin: 3rem;
+		}
+		.hidden{
+			display: none;
 		}
 	</style>
 </head>
@@ -35,5 +39,8 @@
 	</nav>
 	@yield('content')
 	<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+	<script type="text/javascript">
+		$.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+	</script>
 </body>
 </html>

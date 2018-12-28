@@ -41,7 +41,7 @@
 		<div class="form-group">
 			{!!Form::label('text', 'Telefono:', array('class' => 'control-label col-sm-2'))!!}
 			<div class="col-sm-10">
-				{!!Form::number('phone', '', ['class'=>'form-control', 'placeholder'=>'Ingrese su telefono'])!!}
+				{!!Form::number('phone', '', ['class'=>'form-control', 'placeholder'=>'Ingrese su telefono'])!!} 
 			</div>
 		</div>
 		<div class="form-group">        
