@@ -46,7 +46,7 @@ class AlumnosController extends Controller
     public function readStudent(Request $request){
         if($request->ajax()){
             $output="";
-            $students=DB::table('alumnos')->where('nameStudent','LIKE','%'.$request->readStudent."%")->get();
+            $students=DB::table('students')->where('nameStudent','LIKE','%'.$request->readStudent."%")->get();
 
             if($students){
                 foreach ($students as $key => $student) {
@@ -66,18 +66,13 @@ class AlumnosController extends Controller
     public function searchStudent(Request $request){
         if($request->ajax()){
             $output="";
-            $students=DB::table('alumnos')->where('nc','=',$request->nc)->get();
-            if($students){
-                foreach ($students as $key => $student) {
-                    $output.='<tr>'.
-                    '<td>'.$student->nameStudent.'</td>'.
-                    '<td>'.$student->career.'</td>'.
-                    '<td>'.$student->age.'</td>'.
-                    '<td>'.$student->phone.'</td>'.
-                    '</tr>';
+            $query=DB::table('students')->where('nc','=',$request->nc)->get();
+            if($query){
+                foreach ($query as $key => $student) {
+                    $output = array('nameStudent' => $student->nameStudent, 'career' => $student->career, 'age' => $student->age, 'phone' => $student->phone);
                 }
-                return Response($output);
             }
+            return Response($output);
         }
     }
 
@@ -86,8 +81,29 @@ class AlumnosController extends Controller
         return view('update');
     }
 
+    public function updateStudent(Request $request)
+    {
+        if($request->ajax()){
+            $nc=$_GET['nc'];
+            $name=$_GET['name'];
+            $career=$_GET['career'];
+            $age=$_GET['age'];
+            $phone=$_GET['phone'];
+            DB::table('students')->where('nc','=',$request->nc)->update(['nameStudent' => $name, 'career' => $career, 'age' => $age, 'phone' => $phone]);
+            return Response("1");
+        }
+    }
+
     public function delete()
     {
         return view('delete');
+    }
+
+    public function deleteStudent(Request $request)
+    {
+        if($request->ajax()){
+            DB::table('students')->where('nc','=',$request->nc)->delete();
+            return Response("1");
+        }
     }
 }

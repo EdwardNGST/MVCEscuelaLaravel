@@ -13,14 +13,15 @@ class CreateAlumnosTable extends Migration
      */
     public function up()
     {
-        Schema::create('alumnos', function (Blueprint $table) {
-            $table->string('nc');
-            $table->string('nameStudent');
-            $table->string('career');
-            $table->int('age');
-            $table->string('phone');
-            $table->rememberToken();
+        Schema::create('students', function (Blueprint $table) {
+            $table->string('nc', 8);
+            $table->string('nameStudent', 50);
+            $table->enum('career', ['Administración', 'Arquitectura', 'Contador Público', 'Electromecánica', 'Gestión Empresarial', 'Sistemas Computacionales', 'ITICS']);
+            $table->integer('age', false);
+            $table->string('phone', 20)->nullable();
+            $table->rememberToken()->nullable();
             $table->timestamps();
+            $table->primary('nc');
         });
     }
 
@@ -31,6 +32,6 @@ class CreateAlumnosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('alumnos');
+        Schema::dropIfExists('students');
     }
 }

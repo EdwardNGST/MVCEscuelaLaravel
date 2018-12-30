@@ -29,3 +29,7 @@ Route::post('newStudent', ['as' => 'newStudent', 'uses' => 'AlumnosController@ne
 Route::get('readStudent', 'AlumnosController@readStudent');
 
 Route::get('searchStudent', 'AlumnosController@searchStudent');
+
+Route::get('updateStudent', 'AlumnosController@updateStudent');
+
+Route::get('deleteStudent', 'AlumnosController@deleteStudent');
