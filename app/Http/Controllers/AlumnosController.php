@@ -29,8 +29,6 @@ class AlumnosController extends Controller
             'phone' => $request['phone'],
             ]);
         return "Alumno registrado correctamente";
-        //return view('create');
-        //return redirect('create')->with('message', 'store');
     }
 
     public function create(){
@@ -56,6 +54,8 @@ class AlumnosController extends Controller
                     '<td>'.$student->career.'</td>'.
                     '<td>'.$student->age.'</td>'.
                     '<td>'.$student->phone.'</td>'.
+                    '<td><input type="button" class="btn btn-warning" id="'.$student->nc.'" value="Modificar" onclick="(modifyStudent(this.id))"></td>'.
+                    '<td><input type="button" class="btn btn-danger" id="'.$student->nc.'" value="Eliminar" onclick="(deleteStudent(this.id))"></td>'.
                     '</tr>';
                 }
                 return Response($output);

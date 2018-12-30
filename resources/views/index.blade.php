@@ -40,7 +40,6 @@ $('#pdf').click(function () {
  pdf.addHTML($('.container')[0], function () {
      pdf.save('alumnos.pdf');
  });
-
 });
 </script>
 @stop

@@ -12,11 +12,13 @@
 	<table class="table table-hover" id="table2">
 		<thead>
 			<tr>
-        		<th>Numero de Control</th>
+        <th>Numero de Control</th>
 				<th>Nombre Estudiante</th>
 				<th>Carrera</th>
 				<th>Edad</th>
 				<th>Telefono</th>
+        <th>Modificar</th>
+        <th>Eliminar</th>
 			</tr>
 		</thead>
 	    <tbody id="tbody">
@@ -45,6 +47,12 @@ $( window ).on( "load", function() {
         $('#tbody').html(data);
       }
     });
-  })
+  });
+  function modifyStudent(nc){
+    window.location.href = "/update?nc="+nc;
+  }
+  function deleteStudent(nc){
+    window.location.href = "/delete?nc="+nc;
+  }
 </script>
 @stop

@@ -136,5 +136,18 @@
 		$('#phone').val("");
 		$('#search_alert').html('');
 	}
+$( document ).ready(function() {
+	var nc=getParameterByName('nc');
+	if (nc!="") {
+		$('#nc').val(nc);
+	    searchByNC(nc);
+	}
+});
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+    results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 </script>
 @stop

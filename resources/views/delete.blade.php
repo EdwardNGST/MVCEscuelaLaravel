@@ -49,14 +49,17 @@
   var found=false;
   $('#ncontrol').on('keyup',function(){
       var numC=$(this).val();
+      searchByNC(numC);
+  });
+  function searchByNC(nc){
       $.ajax({
         type : 'get',
         url : '{{URL::to('searchStudent')}}',
-        data:{'nc':numC},
+        data:{'nc':nc},
         success:function(data){
           if (data!="") {
             found=true;
-            ncontrol=numC;
+            ncontrol=nc;
             $('#name').html(data.nameStudent);
             $("#career").html(data.career);
             $('#age').html(data.age);
@@ -71,7 +74,7 @@
         }
       });
     event.preventDefault();
-  });
+  }
   $( "#form_delete" ).submit(function( event ) {
     if (ncontrol!="") {
       $.ajax({
@@ -105,5 +108,18 @@
             var found=false;
                         $('#search_alert').html('');
   }
+$( document ).ready(function() {
+    var nc=getParameterByName('nc');
+    if (nc!="") {
+      $('#ncontrol').val(nc);
+      searchByNC(nc);
+    }
+});
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+    results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 </script>
 @stop
