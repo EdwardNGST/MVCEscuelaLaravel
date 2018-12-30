@@ -12,47 +12,47 @@
 	<table class="table table-hover" id="table2">
 		<thead>
 			<tr>
-        <th>Numero de Control</th>
+				<th>Numero de Control</th>
 				<th>Nombre Estudiante</th>
 				<th>Carrera</th>
 				<th>Edad</th>
 				<th>Telefono</th>
-        <th>Modificar</th>
-        <th>Eliminar</th>
+				<th>Modificar</th>
+				<th>Eliminar</th>
 			</tr>
 		</thead>
-	    <tbody id="tbody">
-	    </tbody>
+		<tbody id="tbody">
+		</tbody>
 	</table>
 </div>
 <script type="text/javascript">
-$( window ).on( "load", function() {
-    $value="";
-    $.ajax({
-      type : 'get',
-      url : '{{URL::to('readStudent')}}',
-      data:{'readStudent':$value},
-      success:function(data){
-        $('#tbody').html(data);
-      }
-    });
-});
-  $('#name').on('keyup',function(){
-    $value=$(this).val();
-    $.ajax({
-      type : 'get',
-      url : '{{URL::to('readStudent')}}',
-      data:{'readStudent':$value},
-      success:function(data){
-        $('#tbody').html(data);
-      }
-    });
-  });
-  function modifyStudent(nc){
-    window.location.href = "/update?nc="+nc;
-  }
-  function deleteStudent(nc){
-    window.location.href = "/delete?nc="+nc;
-  }
+	$( window ).on( "load", function() {
+		$value="";
+		$.ajax({
+			type : 'get',
+			url : '{{URL::to('readStudent')}}',
+			data:{'readStudent':$value},
+			success:function(data){
+				$('#tbody').html(data);
+			}
+		});
+	});
+	$('#name').on('keyup',function(){
+		$value=$(this).val();
+		$.ajax({
+			type : 'get',
+			url : '{{URL::to('readStudent')}}',
+			data:{'readStudent':$value},
+			success:function(data){
+			$('#tbody').html(data);
+			}
+		});
+	});
+	function modifyStudent(nc){
+		window.location.href = "/update?nc="+nc;
+	}
+	function deleteStudent(nc){
+		window.location.href = "/delete?nc="+nc;
+	}
 </script>
 @stop
