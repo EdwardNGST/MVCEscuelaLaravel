@@ -25,4 +25,22 @@
     @endforeach
   </table>
 </div>
+<div id="editor"></div>
+<center>
+  <input type="button" class="btn btn-info" id="pdf" value="Guardar en PDF" style="margin-top: 3rem;">
+</center>
+<script type="text/javascript">
+var specialElementHandlers = {
+    '#editor': function (element, renderer) {
+        return true;
+    }
+};
+$('#pdf').click(function () {
+ var pdf = new jsPDF();
+ pdf.addHTML($('.container')[0], function () {
+     pdf.save('alumnos.pdf');
+ });
+
+});
+</script>
 @stop
